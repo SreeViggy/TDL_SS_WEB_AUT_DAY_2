@@ -1,4 +1,7 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
+import checkBoxPage from "../../pageObjects/checkBoxPage";
+import RadioButtonPage from "../../pageObjects/RadioButtonPage";
+
 
 context("Elements Page", () => {
   context("Text box scenarios", () => {
@@ -9,33 +12,67 @@ context("Elements Page", () => {
     // Create texbox scenario
     // fill in textboxes with necessary information
     // validate the paragraphs
+
     it("Filling in Text Boxes", () => {
-      // add the necessary steps
+      TextBoxPage.firstName.type("Vignesh Krishnan");
+      TextBoxPage.emailId.type("viki.vconnect@gmail.com");
+      TextBoxPage.currentAddress.type("Tallinas 35");
+      TextBoxPage.permanentAddress.type("Latvia");
+      TextBoxPage.submitButton.click();
+      TextBoxPage.paraName.should("contains.text",'Vignesh Krishnan');
+      TextBoxPage.paraEmail.should("contains.text",'viki.vconnect@gmail.com');
+      TextBoxPage.paraCurrentAddress.should("contains.text",'Tallinas 35');
+      TextBoxPage.paraPermanentAddress.should("contains.text",'Latvia');
+      
     });
   });
 
+  
   context("Check box scenarios", () => {
-    // Create CheckBoxPage page object
-    // Create checkbox scenario 1:
-    // Click the "+"/expand button
-    // Click Notes, React, Angular, General, Excel File.doc
-    // Validate the clicked checkboxes
+    beforeEach(()=>{
+      checkBoxPage.visit();
+    });
 
-    // Create checkbox scenario 2:
-    // Click expand button
-    // Click Office
-    // Validate the checked checkboxes
+    it("Check-Box validation", ()=>{
+    checkBoxPage.clickExpandButton.click();
+    checkBoxPage.checkNotes.click({force: true});
+    checkBoxPage.checkReact.click({force: true});
+    checkBoxPage.checkAngular.click({force: true});
+    checkBoxPage.checkGeneral.click({force: true});
+    checkBoxPage.excelFile.click({force: true});
+    checkBoxPage.checkBoxValid.should("contains.text",'notes' );
+    checkBoxPage.checkBoxValid.should("contains.text",'react' );
+    checkBoxPage.checkBoxValid.should("contains.text",'angular' );
+    checkBoxPage.checkBoxValid.should("contains.text",'excelFile' );
+
+    });
+   
   });
 
   context("Radio button scenarios", () => {
-    // Create RadioButtons page object
+    beforeEach(()=>{
+    RadioButtonPage.visit();   
+    });
+
+    it.only("RadioButton Validatoin", ()=>{
+      RadioButtonPage.yesRadio.click({force: true});
+      RadioButtonPage.buttonValidation.should("contains.text",'Yes');
+      RadioButtonPage.impressiveRadio.click({force: true});
+      RadioButtonPage.buttonValidation.should("contains.text",'Impressive');
+      // RadioButtonPage.noRadio.click();
+      RadioButtonPage.noRadio.should('exist').should('be.disabled')
+
+    });
+   
+  });
+   // Create RadioButtons page object
     // Scenario 1:
     // Click yesButton
+    
     // validate the message
     // click impressiveButton
     // validate the message
     // noButton - validate that the button exists but is disabled
-  });
 
   context("Web tables scenarios", () => {
     // Create WebTables page object
