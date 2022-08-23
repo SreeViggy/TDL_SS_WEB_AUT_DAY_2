@@ -13,7 +13,7 @@ class ButtonScenarioPage extends BasePage{
     }
 
     static get rightClickMe(){
-        return cy.get("[id=rightClickBtn']");
+        return cy.get("[id='rightClickBtn']");
     }
 
     static get rightClickMsgValidation(){
@@ -21,7 +21,7 @@ class ButtonScenarioPage extends BasePage{
     }
 
     static get clickMe(){
-        return cy.get("[id='tKWEm']");
+        return cy.get("div[class='btn btn-primary']");
     }
     static get dynamiclickMsgValidation(){
         return cy.get("[id='dynamicClickMessage']");
