@@ -1,6 +1,8 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
 import checkBoxPage from "../../pageObjects/checkBoxPage";
 import RadioButtonPage from "../../pageObjects/RadioButtonPage";
+import WebTablesPage from "../../pageObjects/WebTablesPage";
+import ButtonScenarioPage from "../../pageObjects/ButtonScenarioPage";
 
 
 context("Elements Page", () => {
@@ -8,10 +10,6 @@ context("Elements Page", () => {
     beforeEach(() => {
       TextBoxPage.visit();
     });
-
-    // Create texbox scenario
-    // fill in textboxes with necessary information
-    // validate the paragraphs
 
     it("Filling in Text Boxes", () => {
       TextBoxPage.firstName.type("Vignesh Krishnan");
@@ -54,7 +52,7 @@ context("Elements Page", () => {
     RadioButtonPage.visit();   
     });
 
-    it.only("RadioButton Validatoin", ()=>{
+    it("RadioButton Validatoin", ()=>{
       RadioButtonPage.yesRadio.click({force: true});
       RadioButtonPage.buttonValidation.should("contains.text",'Yes');
       RadioButtonPage.impressiveRadio.click({force: true});
@@ -66,28 +64,48 @@ context("Elements Page", () => {
   });
    
   context("Web tables scenarios", () => {
-    // Create WebTables page object
-    // Create scenario 1:
-    // Click add record button
-    // fill in the necessary information
-    // click submit button
-    // search for the user based on previously added information
-    // validate tha the user is visible
+    beforeEach(()=>{
+      WebTablesPage.visit();
+
+    });
+    it("Web Tables", ()=>{
+    WebTablesPage.addButton.click({force: true});
+    WebTablesPage.firstName.type("Vignesh");
+    WebTablesPage.lastName.type("Krishnan");
+    WebTablesPage.emailID.type("viki.vconnect@gmail.com");
+    WebTablesPage.age.type("30");
+    WebTablesPage.salary.type("15000");
+    WebTablesPage.department.type("IT");
+    WebTablesPage.submitButton.click();
+    WebTablesPage.searchBar.type("Vignesh");
+    WebTablesPage.infoValidation.should("contain.text", 'Vignesh');
 
     // Create Scenario 2:
     // Delete all table rows
     // Validate that we see text - No rows found
   });
+  });
+
 
   context("Buttons scenarios", () => {
-    // Create buttons clicking scenario
-    // Create Buttons page
-    // Check documentation https://docs.cypress.io/api/commands/and for how to perform different types of clicking
-    // Click Double click button
-    // Validate the double click message
-    // Click rightclick button
-    // Validate the right click message
-    // Do dynamic click
-    // Validate dynamic click message
-  });
-});
+    beforeEach(()=>{
+      ButtonScenarioPage.visit();
+    });
+
+   it.only("ButtonValidation",()=>{
+
+    ButtonScenarioPage.doubleClickMe.click();
+    ButtonScenarioPage.doubleClickMsgValidation.should("contains.text",'You have done a double click');
+
+    ButtonScenarioPage.rightClickMe.click();
+    ButtonScenarioPage.rightClickMsgValidation.should("contains.text",'You have done a right click');
+
+    ButtonScenarioPage.clickMe.click();
+    ButtonScenarioPage.dynamiclickMsgValidation.should("contains.text",'You have done a dynamic click');
+
+
+    });
+
+    });
+
+  })
