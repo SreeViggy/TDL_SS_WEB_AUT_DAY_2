@@ -59,21 +59,12 @@ context("Elements Page", () => {
       RadioButtonPage.buttonValidation.should("contains.text",'Yes');
       RadioButtonPage.impressiveRadio.click({force: true});
       RadioButtonPage.buttonValidation.should("contains.text",'Impressive');
-      // RadioButtonPage.noRadio.click();
       RadioButtonPage.noRadio.should('exist').should('be.disabled')
 
     });
    
   });
-   // Create RadioButtons page object
-    // Scenario 1:
-    // Click yesButton
-    
-    // validate the message
-    // click impressiveButton
-    // validate the message
-    // noButton - validate that the button exists but is disabled
-
+   
   context("Web tables scenarios", () => {
     // Create WebTables page object
     // Create scenario 1:
